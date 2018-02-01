@@ -2,19 +2,12 @@
 @import "fonts"
 @import "libs"
 
-*::placeholder
+::placeholder
 	color: #666
 
 ::selection
 	background-color: $accent
 	color: #fff
-
-body input:focus:required:invalid,
-body textarea:focus:required:invalid
-	// color: red
-body input:required:valid,
-body textarea:required:valid
-	// color: green
 
 html, body
 	height: 100%
@@ -26,6 +19,13 @@ body
 	line-height: 1.65
 	font-family: $default-font
 	overflow-x: hidden
+	input, textarea
+			border: #666 1px solid
+			outline: none
+			&:focus:required:invalid
+				border-color: red
+			&:required:valid
+				border-color: green
 
 .img-responsive
 	display: block
