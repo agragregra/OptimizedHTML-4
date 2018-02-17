@@ -10,19 +10,6 @@ var gulp          = require('gulp'),
 		notify        = require("gulp-notify"),
 		rsync         = require('gulp-rsync');
 
-// Scripts concat & minify
-
-gulp.task('js', function() {
-	return gulp.src([
-		'app/libs/jquery/dist/jquery.min.js',
-		'app/js/common.js', // Always at the end
-		])
-	.pipe(concat('scripts.min.js'))
-	// .pipe(uglify()) // Mifify js (opt.)
-	.pipe(gulp.dest('app/js'))
-	.pipe(browsersync.reload({ stream: true }))
-});
-
 gulp.task('browser-sync', function() {
 	browsersync({
 		server: {
@@ -43,6 +30,17 @@ gulp.task('sass', function() {
 	.pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
 	.pipe(gulp.dest('app/css'))
 	.pipe(browsersync.reload( {stream: true} ))
+});
+
+gulp.task('js', function() {
+	return gulp.src([
+		'app/libs/jquery/dist/jquery.min.js',
+		'app/js/common.js', // Always at the end
+		])
+	.pipe(concat('scripts.min.js'))
+	// .pipe(uglify()) // Mifify js (opt.)
+	.pipe(gulp.dest('app/js'))
+	.pipe(browsersync.reload({ stream: true }))
 });
 
 gulp.task('watch', ['sass', 'js', 'browser-sync'], function() {
