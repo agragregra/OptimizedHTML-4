@@ -12,7 +12,7 @@
 
 <p>Cross-browser compatibility: IE9+.</p>
 
-<p>The template uses a Sass with <strong>Sass</strong> syntax.</p>
+<p>The template uses a Sass with <strong>Sass</strong> or <strong>Scss</strong> syntax (optional).</p>
 
 <h2>How to use OptimizedHTML</h2>
 

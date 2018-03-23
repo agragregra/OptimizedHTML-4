@@ -1,3 +1,5 @@
+var syntax        = 'sass'; // Syntax: sass or scss;
+
 var gulp          = require('gulp'),
 		gutil         = require('gulp-util' ),
 		sass          = require('gulp-sass'),
@@ -22,8 +24,8 @@ gulp.task('browser-sync', function() {
 	})
 });
 
-gulp.task('sass', function() {
-	return gulp.src('app/sass/**/*.sass')
+gulp.task('styles', function() {
+	return gulp.src('app/'+syntax+'/**/*.'+syntax+'')
 	.pipe(sass({ outputStyle: 'expand' }).on("error", notify.onError()))
 	.pipe(rename({ suffix: '.min', prefix : '' }))
 	.pipe(autoprefixer(['last 15 versions']))
@@ -58,8 +60,8 @@ gulp.task('rsync', function() {
 	}))
 });
 
-gulp.task('watch', ['sass', 'js', 'browser-sync'], function() {
-	gulp.watch('app/sass/**/*.sass', ['sass']);
+gulp.task('watch', ['styles', 'js', 'browser-sync'], function() {
+	gulp.watch('app/'+syntax+'/**/*.'+syntax+'', ['styles']);
 	gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['js']);
 	gulp.watch('app/*.html', browsersync.reload)
 });
