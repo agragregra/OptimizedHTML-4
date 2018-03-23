@@ -20,7 +20,7 @@ gulp.task('browser-sync', function() {
 		notify: false,
 		// open: false,
 		// tunnel: true,
-		// tunnel: "projectmane", //Demonstration page: http://projectmane.localtunnel.me
+		// tunnel: "projectname", //Demonstration page: http://projectname.localtunnel.me
 	})
 });
 
