@@ -3,39 +3,28 @@
 
 /*==========  Desktop First  ==========*/
 
-
-//Extra large: ≥1200px
-@include media-breakpoint-down(xl) {
-
-}
-
-//Large: ≥992px
+//Large: ≥1200px
 @include media-breakpoint-down(lg) {
-
+	
 }
 
-//Medium: ≥768px
+//Medium: ≥992px
 @include media-breakpoint-down(md) {
 
 }
 
-//Small: ≥576px
+//Small: ≥768px
 @include media-breakpoint-down(sm) {
 
 }
 
-//Extra small: >0
+//Extra ≥576px
 @include media-breakpoint-down(xs) {
 
 }
 
 
 /*==========  Mobile First  ==========*/
-
-//Extra small: <576px
-@include media-breakpoint-up(xs) {
-
-}
 
 //Small: ≤576px
 @include media-breakpoint-up(sm) {
@@ -54,5 +43,5 @@
 
 //Extra large: ≤1200px
 @include media-breakpoint-up(xl) {
-
+	
 }
