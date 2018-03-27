@@ -3,22 +3,22 @@
 
 /*==========  Desktop First  ==========*/
 
-//Large: ≥1200px
+// ≥1200px
 @include media-breakpoint-down(lg) {
 	
 }
 
-//Medium: ≥992px
+// ≥992px
 @include media-breakpoint-down(md) {
 
 }
 
-//Small: ≥768px
+// ≥768px
 @include media-breakpoint-down(sm) {
 
 }
 
-//Extra ≥576px
+// ≥576px
 @include media-breakpoint-down(xs) {
 
 }
@@ -26,22 +26,22 @@
 
 /*==========  Mobile First  ==========*/
 
-//Small: ≤576px
+// ≤576px
 @include media-breakpoint-up(sm) {
 
 }
 
-//Medium: ≤768px
+// ≤768px
 @include media-breakpoint-up(md) {
 
 }
 
-//Large: ≤992px
+// ≤992px
 @include media-breakpoint-up(lg) {
 
 }
 
-//Extra large: ≤1200px
+// ≤1200px
 @include media-breakpoint-up(xl) {
 	
 }
