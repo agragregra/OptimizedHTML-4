@@ -18,6 +18,7 @@ body {
 	line-height: 1.65;
 	font-family: $default-font;
 	overflow-x: hidden;
+	color: $text;
 	input, textarea {
 		border: #666 1px solid;
 		outline: none;
