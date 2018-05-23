@@ -1,5 +1,3 @@
-var syntax        = 'sass'; // Syntax: sass or scss;
-
 var gulp          = require('gulp'),
 		gutil         = require('gulp-util' ),
 		sass          = require('gulp-sass'),
@@ -10,8 +8,12 @@ var gulp          = require('gulp'),
 		rename        = require('gulp-rename'),
 		autoprefixer  = require('gulp-autoprefixer'),
 		notify        = require("gulp-notify"),
-		rsync         = require('gulp-rsync');
-
+		rsync         = require('gulp-rsync'),
+		argv = require('minimist')(process.argv.slice(2)),
+		syntax = 'sass';  
+if (argv.scss) { // Use 'gulp --scss' for scss files or 'gulp' for sass
+	syntax = 'scss';
+}
 gulp.task('browser-sync', function() {
 	browserSync({
 		server: {
