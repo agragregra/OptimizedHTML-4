@@ -10,10 +10,12 @@ var gulp          = require('gulp'),
 		notify        = require("gulp-notify"),
 		rsync         = require('gulp-rsync'),
 		argv = require('minimist')(process.argv.slice(2)),
-		syntax = 'sass';  
+		syntax = 'sass';
+
 if (argv.scss) { // Use 'gulp --scss' for scss files or 'gulp' for sass
 	syntax = 'scss';
 }
+
 gulp.task('browser-sync', function() {
 	browserSync({
 		server: {
