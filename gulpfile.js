@@ -63,7 +63,23 @@ gulp.task('rsync', function() {
 gulp.task('watch', ['styles', 'js', 'browser-sync'], function() {
 	gulp.watch('app/'+syntax+'/**/*.'+syntax+'', ['styles']);
 	gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['js']);
-	gulp.watch('app/*.html', browserSync.reload)
+	gulp.watch('app/*.html', browserSync.reload);
+	
+	fs.watchFile( "app.css/main.min.css", {
+		interval: 100
+	}, ( current, previous ) => {
+		if ( current.size == 0 ) {
+			gulp.start( 'scss' );
+		}
+	} );
+
+	fs.watchFile( "app/js/scripts.min.js", {
+		interval: 100
+	}, ( current, previous ) => {
+		if ( current.size == 0 ) {
+			gulp.start( 'js' );
+		}
+	} );
 });
 
 gulp.task('default', ['watch']);
