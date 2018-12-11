@@ -9,7 +9,7 @@ var gulp          = require('gulp'),
 		cleancss      = require('gulp-clean-css'),
 		rename        = require('gulp-rename'),
 		autoprefixer  = require('gulp-autoprefixer'),
-		notify        = require("gulp-notify"),
+		notify        = require('gulp-notify'),
 		rsync         = require('gulp-rsync');
 
 gulp.task('browser-sync', function() {
@@ -34,7 +34,7 @@ gulp.task('styles', function() {
 	.pipe(browserSync.stream())
 });
 
-gulp.task('js', function() {
+gulp.task('scripts', function() {
 	return gulp.src([
 		'app/libs/jquery/dist/jquery.min.js',
 		'app/js/common.js', // Always at the end
@@ -42,6 +42,11 @@ gulp.task('js', function() {
 	.pipe(concat('scripts.min.js'))
 	// .pipe(uglify()) // Mifify js (opt.)
 	.pipe(gulp.dest('app/js'))
+	.pipe(browserSync.reload({ stream: true }))
+});
+
+gulp.task('code', function() {
+	return gulp.src('app/*.html')
 	.pipe(browserSync.reload({ stream: true }))
 });
 
@@ -60,10 +65,10 @@ gulp.task('rsync', function() {
 	}))
 });
 
-gulp.task('watch', ['styles', 'js', 'browser-sync'], function() {
+gulp.task('watch', ['styles', 'scripts', 'browser-sync'], function() {
 	gulp.watch('app/'+syntax+'/**/*.'+syntax+'', ['styles']);
-	gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['js']);
-	gulp.watch('app/*.html', browserSync.reload)
+	gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['scripts']);
+	gulp.watch('app/*.html', ['code'])
 });
 
 gulp.task('default', ['watch']);
