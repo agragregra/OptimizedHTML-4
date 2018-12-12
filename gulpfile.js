@@ -1,4 +1,6 @@
-var syntax        = 'sass'; // Syntax: sass or scss;
+var syntax        = 'sass',
+		gulpversion   = '4'; // Syntax: sass or scss;
+
 
 var gulp          = require('gulp'),
 		gutil         = require('gulp-util' ),
@@ -65,10 +67,20 @@ gulp.task('rsync', function() {
 	}))
 });
 
-gulp.task('watch', ['styles', 'scripts', 'browser-sync'], function() {
-	gulp.watch('app/'+syntax+'/**/*.'+syntax+'', ['styles']);
-	gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['scripts']);
-	gulp.watch('app/*.html', ['code'])
-});
+if (gulpversion == 3) {
+	gulp.task('watch', ['styles', 'scripts', 'browser-sync'], function() {
+		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', ['styles']);
+		gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['scripts']);
+		gulp.watch('app/*.html', ['code'])
+	});
+	gulp.task('default', ['watch']);
+}
 
-gulp.task('default', ['watch']);
+if (gulpversion == 4) {
+	gulp.task('watch', function() {
+		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', gulp.parallel('styles'));
+		gulp.watch(['libs/**/*.js', 'app/js/common.js'], gulp.parallel('scripts'));
+		gulp.watch('app/*.html', gulp.parallel('code'))
+	});
+	gulp.task('default', gulp.parallel('watch', 'styles', 'scripts', 'browser-sync'));
+}
