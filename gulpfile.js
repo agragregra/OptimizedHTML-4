@@ -84,5 +84,5 @@ if (gulpversion == 4) {
 		gulp.watch(['libs/**/*.js', root+'/js/common.js'], gulp.parallel('scripts'));
 		gulp.watch(root+'/*.html', gulp.parallel('code'))
 	});
-	gulp.task('default', gulp.parallel('watch', 'styles', 'scripts', 'browser-sync'));
+	gulp.task('default', gulp.parallel('watch', 'browser-sync'));
 }
