@@ -1,6 +1,8 @@
 var syntax        = 'sass',
-		gulpversion   = '4'; // Syntax: sass or scss;
-
+		gulpversion   = '4', // Syntax: sass or scss;
+		hostname			= 'username@yousite.com',
+		path        	= 'yousite/public_html/',
+		root        	= 'app';
 
 var gulp          = require('gulp'),
 		gutil         = require('gulp-util' ),
@@ -17,7 +19,7 @@ var gulp          = require('gulp'),
 gulp.task('browser-sync', function() {
 	browserSync({
 		server: {
-			baseDir: 'app'
+			baseDir: root
 		},
 		notify: false,
 		// open: false,
@@ -27,37 +29,37 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('styles', function() {
-	return gulp.src('app/'+syntax+'/**/*.'+syntax+'')
+	return gulp.src(root+'/'+syntax+'/**/*.'+syntax+'')
 	.pipe(sass({ outputStyle: 'expanded' }).on("error", notify.onError()))
 	.pipe(rename({ suffix: '.min', prefix : '' }))
 	.pipe(autoprefixer(['last 15 versions']))
 	.pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
-	.pipe(gulp.dest('app/css'))
+	.pipe(gulp.dest(root+'/css'))
 	.pipe(browserSync.stream())
 });
 
 gulp.task('scripts', function() {
 	return gulp.src([
-		'app/libs/jquery/dist/jquery.min.js',
-		'app/js/common.js', // Always at the end
+		root+'/libs/jquery/dist/jquery.min.js',
+		root+'/js/common.js', // Always at the end
 		])
 	.pipe(concat('scripts.min.js'))
 	// .pipe(uglify()) // Mifify js (opt.)
-	.pipe(gulp.dest('app/js'))
+	.pipe(gulp.dest(root+'/js'))
 	.pipe(browserSync.reload({ stream: true }))
 });
 
 gulp.task('code', function() {
-	return gulp.src('app/*.html')
+	return gulp.src(root+'/*.html')
 	.pipe(browserSync.reload({ stream: true }))
 });
 
 gulp.task('rsync', function() {
-	return gulp.src('app/**')
+	return gulp.src(root+'/**')
 	.pipe(rsync({
-		root: 'app/',
-		hostname: 'username@yousite.com',
-		destination: 'yousite/public_html/',
+		root: root+'/',
+		hostname: hostname,
+		destination: path,
 		// include: ['*.htaccess'], // Includes files to deploy
 		exclude: ['**/Thumbs.db', '**/*.DS_Store'], // Excludes files from deploy
 		recursive: true,
@@ -69,18 +71,18 @@ gulp.task('rsync', function() {
 
 if (gulpversion == 3) {
 	gulp.task('watch', ['styles', 'scripts', 'browser-sync'], function() {
-		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', ['styles']);
-		gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['scripts']);
-		gulp.watch('app/*.html', ['code'])
+		gulp.watch(root+'/'+syntax+'/**/*.'+syntax+'', ['styles']);
+		gulp.watch(['libs/**/*.js', root+'/js/common.js'], ['scripts']);
+		gulp.watch(root+'/*.html', ['code'])
 	});
 	gulp.task('default', ['watch']);
 }
 
 if (gulpversion == 4) {
 	gulp.task('watch', function() {
-		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', gulp.parallel('styles'));
-		gulp.watch(['libs/**/*.js', 'app/js/common.js'], gulp.parallel('scripts'));
-		gulp.watch('app/*.html', gulp.parallel('code'))
+		gulp.watch(root+'/'+syntax+'/**/*.'+syntax+'', gulp.parallel('styles'));
+		gulp.watch(['libs/**/*.js', root+'/js/common.js'], gulp.parallel('scripts'));
+		gulp.watch(root+'/*.html', gulp.parallel('code'))
 	});
 	gulp.task('default', gulp.parallel('watch', 'styles', 'scripts', 'browser-sync'));
 }
