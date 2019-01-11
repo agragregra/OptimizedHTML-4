@@ -67,7 +67,7 @@ gulp.task('rsync', function() {
 });
 
 if (gulpversion == 3) {
-	gulp.task('watch', ['browser-sync'], function() {
+	gulp.task('watch', ['styles', 'scripts', 'browser-sync'], function() {
 		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', ['styles']);
 		gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['scripts']);
 		gulp.watch('app/*.html', ['code'])
@@ -81,5 +81,5 @@ if (gulpversion == 4) {
 		gulp.watch(['libs/**/*.js', 'app/js/common.js'], gulp.parallel('scripts'));
 		gulp.watch('app/*.html', gulp.parallel('code'))
 	});
-	gulp.task('default', gulp.parallel('watch', 'browser-sync'));
+	gulp.task('default', gulp.parallel('styles', 'scripts', 'browser-sync', 'watch'));
 }
