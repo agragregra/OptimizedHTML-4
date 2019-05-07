@@ -13,7 +13,8 @@ var gulp          = require('gulp'),
 		notify        = require('gulp-notify'),
 		rsync         = require('gulp-rsync'),
 		imageResize   = require('gulp-image-resize'),
-		imagemin      = require('gulp-imagemin');
+		imagemin      = require('gulp-imagemin'),
+		del           = require('del');
 
 // Local Server
 gulp.task('browser-sync', function() {
@@ -78,27 +79,33 @@ gulp.task('imgx1', function() {
 	return gulp.src('app/img/_src/*.*')
 	.pipe(imageResize({ width: '50%' }))
 	.pipe(imagemin())
-	.pipe(gulp.dest('app/img/@1x/'));
-})
+	.pipe(gulp.dest('app/img/@1x/'))
+});
 gulp.task('imgx2', function() {
 	return gulp.src('app/img/_src/*.*')
 	.pipe(imagemin())
-	.pipe(gulp.dest('app/img/@2x/'));
-})
+	.pipe(gulp.dest('app/img/@2x/'))
+});
+
+// Clean @*x IMG's
+gulp.task('cleanimg', function() {
+	return del(['app/img/@*'], { force:true })
+});
 
 // If Gulp Version 3
 if (gulpversion == 3) {
 
 	gulp.task('img', ['imgx1', 'imgx2']);
 
-	gulp.task('watch', ['styles', 'scripts', 'browser-sync'], function() {
+	gulp.task('watch', ['styles', 'scripts', 'browser-sync', 'img'], function() {
 		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', ['styles']);
 		gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['scripts']);
-		gulp.watch('app/*.html', ['code'])
+		gulp.watch('app/*.html', ['code']);
+		gulp.watch('app/img/_src/**/*', ['img']);
 	});
 	gulp.task('default', ['watch']);
 
-}
+};
 
 // If Gulp Version 4
 if (gulpversion == 4) {
@@ -108,8 +115,9 @@ if (gulpversion == 4) {
 	gulp.task('watch', function() {
 		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', gulp.parallel('styles'));
 		gulp.watch(['libs/**/*.js', 'app/js/common.js'], gulp.parallel('scripts'));
-		gulp.watch('app/*.html', gulp.parallel('code'))
+		gulp.watch('app/*.html', gulp.parallel('code'));
+		gulp.watch('app/img/_src/**/*', gulp.parallel('img'));
 	});
-	gulp.task('default', gulp.parallel('styles', 'scripts', 'browser-sync', 'watch'));
+	gulp.task('default', gulp.parallel('styles', 'scripts', 'browser-sync', 'img', 'watch'));
 
-}
+};

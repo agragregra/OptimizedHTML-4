@@ -10,17 +10,18 @@
 	"license": "ISC",
 	"devDependencies": {
 		"browser-sync": "^2.26.5",
+		"del": "^4.1.1",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^6.1.0",
 		"gulp-clean-css": "^4.2.0",
 		"gulp-concat": "^2.6.1",
+		"gulp-image-resize": "^0.13.0",
+		"gulp-imagemin": "^5.0.3",
 		"gulp-notify": "^3.2.0",
 		"gulp-rename": "^1.4.0",
 		"gulp-rsync": "0.0.8",
 		"gulp-sass": "^4.0.2",
 		"gulp-uglify": "^3.0.2",
-		"gulp-util": "^3.0.8",
-		"gulp-image-resize": "^0.13.0",
-		"gulp-imagemin": "^5.0.3"
+		"gulp-util": "^3.0.8"
 	}
 }
