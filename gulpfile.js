@@ -110,13 +110,13 @@ if (gulpversion == 3) {
 // If Gulp Version 4
 if (gulpversion == 4) {
 
-	gulp.task('img', gulp.parallel('imgx1', 'imgx2'));
+	gulp.task('img', gulp.series('imgx1', 'imgx2'));
 
 	gulp.task('watch', function() {
 		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', gulp.parallel('styles'));
 		gulp.watch(['libs/**/*.js', 'app/js/common.js'], gulp.parallel('scripts'));
 		gulp.watch('app/*.html', gulp.parallel('code'));
-		gulp.watch('app/img/_src/**/*', gulp.parallel('img'));
+		gulp.watch('app/img/_src/**/*', gulp.series('img'));
 	});
 	gulp.task('default', gulp.parallel('styles', 'scripts', 'browser-sync', 'img', 'watch'));
 
