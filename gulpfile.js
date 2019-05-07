@@ -11,8 +11,11 @@ var gulp          = require('gulp'),
 		rename        = require('gulp-rename'),
 		autoprefixer  = require('gulp-autoprefixer'),
 		notify        = require('gulp-notify'),
-		rsync         = require('gulp-rsync');
+		rsync         = require('gulp-rsync'),
+		imageResize   = require('gulp-image-resize'),
+		imagemin      = require('gulp-imagemin');
 
+// Local Server
 gulp.task('browser-sync', function() {
 	browserSync({
 		server: {
@@ -25,6 +28,7 @@ gulp.task('browser-sync', function() {
 	})
 });
 
+// Sass|Scss Styles
 gulp.task('styles', function() {
 	return gulp.src('app/'+syntax+'/**/*.'+syntax+'')
 	.pipe(sass({ outputStyle: 'expanded' }).on("error", notify.onError()))
@@ -35,6 +39,7 @@ gulp.task('styles', function() {
 	.pipe(browserSync.stream())
 });
 
+// JS
 gulp.task('scripts', function() {
 	return gulp.src([
 		'app/libs/jquery/dist/jquery.min.js',
@@ -46,11 +51,13 @@ gulp.task('scripts', function() {
 	.pipe(browserSync.reload({ stream: true }))
 });
 
+// HTML Live Reload
 gulp.task('code', function() {
 	return gulp.src('app/*.html')
 	.pipe(browserSync.reload({ stream: true }))
 });
 
+// Deploy
 gulp.task('rsync', function() {
 	return gulp.src('app/**')
 	.pipe(rsync({
@@ -66,20 +73,43 @@ gulp.task('rsync', function() {
 	}))
 });
 
+// Images @x1 & @x2 + Compression | Required graphicsmagick (sudo apt update; sudo apt install graphicsmagick)
+gulp.task('imgx1', function() {
+	return gulp.src('app/img/_src/*.*')
+	.pipe(imageResize({ width: '50%' }))
+	.pipe(imagemin())
+	.pipe(gulp.dest('app/img/@1x/'));
+})
+gulp.task('imgx2', function() {
+	return gulp.src('app/img/_src/*.*')
+	.pipe(imagemin())
+	.pipe(gulp.dest('app/img/@2x/'));
+})
+
+// If Gulp Version 3
 if (gulpversion == 3) {
+
+	gulp.task('img', ['imgx1', 'imgx2']);
+
 	gulp.task('watch', ['styles', 'scripts', 'browser-sync'], function() {
 		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', ['styles']);
 		gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['scripts']);
 		gulp.watch('app/*.html', ['code'])
 	});
 	gulp.task('default', ['watch']);
+
 }
 
+// If Gulp Version 4
 if (gulpversion == 4) {
+
+	gulp.task('img', gulp.parallel('imgx1', 'imgx2'));
+
 	gulp.task('watch', function() {
 		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', gulp.parallel('styles'));
 		gulp.watch(['libs/**/*.js', 'app/js/common.js'], gulp.parallel('scripts'));
 		gulp.watch('app/*.html', gulp.parallel('code'))
 	});
 	gulp.task('default', gulp.parallel('styles', 'scripts', 'browser-sync', 'watch'));
+
 }
