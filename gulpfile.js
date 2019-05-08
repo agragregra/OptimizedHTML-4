@@ -83,6 +83,7 @@ gulp.task('imgx1', function() {
 });
 gulp.task('imgx2', function() {
 	return gulp.src('app/img/_src/*.*')
+	.pipe(imageResize({ width: '100%' }))
 	.pipe(imagemin())
 	.pipe(gulp.dest('app/img/@2x/'))
 });
