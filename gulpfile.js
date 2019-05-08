@@ -118,6 +118,6 @@ if (gulpversion == 4) {
 		gulp.watch('app/*.html', gulp.parallel('code'));
 		gulp.watch('app/img/_src/**/*', gulp.parallel('img'));
 	});
-	gulp.task('default', gulp.series('styles', 'scripts', 'img', 'browser-sync', 'watch'));
+	gulp.task('default', gulp.parallel('img', 'styles', 'scripts', 'browser-sync', 'watch'));
 
 };
