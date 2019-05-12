@@ -76,13 +76,13 @@ gulp.task('rsync', function() {
 
 // Images @x1 & @x2 + Compression | Required graphicsmagick (sudo apt update; sudo apt install graphicsmagick)
 gulp.task('imgx1', function() {
-	return gulp.src('app/img/_src/*.*')
+	return gulp.src('app/img/_src/**/*.*')
 	.pipe(imageResize({ width: '50%' }))
 	.pipe(imagemin())
 	.pipe(gulp.dest('app/img/@1x/'))
 });
 gulp.task('imgx2', function() {
-	return gulp.src('app/img/_src/*.*')
+	return gulp.src('app/img/_src/**/*.*')
 	.pipe(imageResize({ width: '100%' }))
 	.pipe(imagemin())
 	.pipe(gulp.dest('app/img/@2x/'))
