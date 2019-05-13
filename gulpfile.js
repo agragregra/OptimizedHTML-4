@@ -76,13 +76,13 @@ gulp.task('rsync', function() {
 });
 
 // Images @x1 & @x2 + Compression | Required graphicsmagick (sudo apt update; sudo apt install graphicsmagick)
-gulp.task('imgx1', function() {
+gulp.task('img1x', function() {
 	return gulp.src('app/img/_src/**/*.*')
 	.pipe(imageResize({ width: '50%' }))
 	.pipe(imagemin())
 	.pipe(gulp.dest('app/img/@1x/'))
 });
-gulp.task('imgx2', function() {
+gulp.task('img2x', function() {
 	return gulp.src('app/img/_src/**/*.*')
 	.pipe(imageResize({ width: '100%' }))
 	.pipe(imagemin())
@@ -98,7 +98,7 @@ gulp.task('cleanimg', function() {
 if (gulpVersion == 3) {
 
 	// Img Processing Task for Gulp 3
-	gulp.task('img', ['imgx1', 'imgx2']);
+	gulp.task('img', ['img1x', 'img2x']);
 	
 	var taskArr = ['styles', 'scripts', 'browser-sync'];
 	gmWatch && taskArr.unshift('img');
@@ -117,7 +117,7 @@ if (gulpVersion == 3) {
 if (gulpVersion == 4) {
 
 	// Img Processing Task for Gulp 4
-	gulp.task('img', gulp.parallel('imgx1', 'imgx2'));
+	gulp.task('img', gulp.parallel('img1x', 'img2x'));
 
 	gulp.task('watch', function() {
 		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', gulp.parallel('styles'));
