@@ -1,5 +1,6 @@
-var syntax        = 'sass', // Syntax: sass or scss;
-		gulpversion   = '4'; // Gulp version: 3 or 4
+var syntax         = 'sass', // Syntax: sass or scss;
+		gulpVersion    = '4'; // Gulp version: 3 or 4
+		gmWatch        = false; // ON/OFF GraphicsMagick watching "img/_src" folder (true/false). Linux install gm: sudo apt update; sudo apt install graphicsmagick
 
 var gulp          = require('gulp'),
 		gutil         = require('gulp-util' ),
@@ -94,31 +95,37 @@ gulp.task('cleanimg', function() {
 });
 
 // If Gulp Version 3
-if (gulpversion == 3) {
+if (gulpVersion == 3) {
 
+	// Img Processing Task for Gulp 3
 	gulp.task('img', ['imgx1', 'imgx2']);
+	
+	var taskArr = ['styles', 'scripts', 'browser-sync'];
+	gmWatch && taskArr.unshift('img');
 
-	gulp.task('watch', ['styles', 'scripts', 'img', 'browser-sync'], function() {
+	gulp.task('watch', taskArr, function() {
 		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', ['styles']);
 		gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['scripts']);
 		gulp.watch('app/*.html', ['code']);
-		gulp.watch('app/img/_src/**/*', ['img']);
+		gmWatch && gulp.watch('app/img/_src/**/*', ['img']);
 	});
 	gulp.task('default', ['watch']);
 
 };
 
 // If Gulp Version 4
-if (gulpversion == 4) {
+if (gulpVersion == 4) {
 
+	// Img Processing Task for Gulp 4
 	gulp.task('img', gulp.parallel('imgx1', 'imgx2'));
 
 	gulp.task('watch', function() {
 		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', gulp.parallel('styles'));
 		gulp.watch(['libs/**/*.js', 'app/js/common.js'], gulp.parallel('scripts'));
 		gulp.watch('app/*.html', gulp.parallel('code'));
-		gulp.watch('app/img/_src/**/*', gulp.parallel('img'));
+		gmWatch && gulp.watch('app/img/_src/**/*', gulp.parallel('img')); // GraphicsMagick wathing image sources if allowed.
 	});
-	gulp.task('default', gulp.parallel('img', 'styles', 'scripts', 'browser-sync', 'watch'));
+	gmWatch ? gulp.task('default', gulp.parallel('img', 'styles', 'scripts', 'browser-sync', 'watch')) 
+					: gulp.task('default', gulp.parallel('styles', 'scripts', 'browser-sync', 'watch'));
 
 };
