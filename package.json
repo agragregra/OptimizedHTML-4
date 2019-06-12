@@ -1,12 +1,12 @@
 {
-	"name": "optimizedhtml",
+	"name": "HTML5BootstrapBoilerplate",
 	"version": "4.0.0",
-	"description": "OptimizedHTML 4 - Start HTML Template",
+	"description": "HTML5 Bootstrap Boilerplate based on Gulp & Bootstrap 4",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "WebDesign Master",
+	"author": "Justin Kubicek",
 	"license": "ISC",
 	"devDependencies": {
 		"browser-sync": "^2.26.5",

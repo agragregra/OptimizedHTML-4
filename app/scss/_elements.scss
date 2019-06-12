@@ -1,0 +1,35 @@
+html, body { 
+    // Styles here
+}
+
+body { 
+    // Styles here
+}
+
+a {
+    // Styles here
+    &:hover,&:focus{
+        // Styles here
+    }
+    &:link, &:visited{
+        // Styles here
+    }
+}
+
+dd {
+
+}
+
+code {
+	font-family: 'Roboto Mono', monospace !important;
+	// background-color: #eee;
+}
+
+pre {
+	code {
+		display: block;
+		white-space: pre-wrap;
+		max-width: 90%;
+		word-break: break-word;
+	}
+}

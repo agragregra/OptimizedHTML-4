@@ -1,5 +1,3 @@
-$(function() {
+import $ from "jquery";
 
-	// Custom JS
-
-});
+import './import.js'
