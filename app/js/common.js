@@ -1,3 +1,8 @@
-import $ from "jquery";
+// 'use strict';
+// Vanilla Javascript
+(function() {
 
-import './import.js'
+	// Custom JS
+	console.log('Javascript is working!');
+
+})();
