@@ -5,7 +5,7 @@ var syntax         = 'scss', // Syntax: sass or scss;
 var gulp          = require('gulp'),
 		gutil         = require('gulp-util' ),
 		sass          = require('gulp-sass'),
-		jshint      = require('gulp-jshint'),
+		eslint      = require('gulp-eslint'),
 		browserSync   = require('browser-sync'),
 		concat        = require('gulp-concat'),
 		uglify        = require('gulp-uglify'),
@@ -60,6 +60,15 @@ gulp.task('jshint', function() {
     return gulp.src('app/js/common.js')
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
+});
+
+// Run ESlint
+gulp.task('eslint', function() {
+    return gulp.src('app/js/scripts.js')
+		.pipe(eslint())
+		.pipe(eslint.format())
+		// .pipe(eslint.failAfterError()) //(opt.)
+		;
 });
 
 // HTML Live Reload
@@ -137,7 +146,7 @@ if (gulpVersion == 4) {
 
 		gulp.watch('app/'+syntax+'/**/*.'+syntax+'', gulp.parallel('styles'));
 		gulp.watch('app/js/common.js', gulp.parallel('scripts'));
-		gulp.watch('app/js/common.js', gulp.parallel('jshint'));
+		gulp.watch('app/js/common.js', gulp.parallel('eslint'));
 		gulp.watch('app/*.html', gulp.parallel('code'));
 		gmWatch && gulp.watch('app/img/_src/**/*', gulp.parallel('img')); // GraphicsMagick watching image sources if allowed.
 	});
