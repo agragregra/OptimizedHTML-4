@@ -53,6 +53,25 @@ gulp.task('scripts', function() {
 	.pipe(browserSync.reload({ stream: true }))
 });
 
+// Images @x1 & @x2 + Compression | Required graphicsmagick (sudo apt update; sudo apt install graphicsmagick)
+gulp.task('img1x', function() {
+	return gulp.src('app/img/_src/**/*.*')
+	.pipe(imageResize({ width: '50%' }))
+	.pipe(imagemin())
+	.pipe(gulp.dest('app/img/@1x/'))
+});
+gulp.task('img2x', function() {
+	return gulp.src('app/img/_src/**/*.*')
+	.pipe(imageResize({ width: '100%' }))
+	.pipe(imagemin())
+	.pipe(gulp.dest('app/img/@2x/'))
+});
+
+// Clean @*x IMG's
+gulp.task('cleanimg', function() {
+	return del(['app/img/@*'], { force:true })
+});
+
 // HTML Live Reload
 gulp.task('code', function() {
 	return gulp.src('app/*.html')
@@ -73,25 +92,6 @@ gulp.task('rsync', function() {
 		silent: false,
 		compress: true
 	}))
-});
-
-// Images @x1 & @x2 + Compression | Required graphicsmagick (sudo apt update; sudo apt install graphicsmagick)
-gulp.task('img1x', function() {
-	return gulp.src('app/img/_src/**/*.*')
-	.pipe(imageResize({ width: '50%' }))
-	.pipe(imagemin())
-	.pipe(gulp.dest('app/img/@1x/'))
-});
-gulp.task('img2x', function() {
-	return gulp.src('app/img/_src/**/*.*')
-	.pipe(imageResize({ width: '100%' }))
-	.pipe(imagemin())
-	.pipe(gulp.dest('app/img/@2x/'))
-});
-
-// Clean @*x IMG's
-gulp.task('cleanimg', function() {
-	return del(['app/img/@*'], { force:true })
 });
 
 // If Gulp Version 3
