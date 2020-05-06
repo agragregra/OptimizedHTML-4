@@ -2,8 +2,7 @@ var syntax         = 'sass', // Syntax: sass or scss;
 		gulpVersion    = '4'; // Gulp version: 3 or 4
 		gmWatch        = false; // ON/OFF GraphicsMagick watching "img/_src" folder (true/false). Linux install gm: sudo apt update; sudo apt install graphicsmagick
 
-var gulp          = require('gulp'),
-		gutil         = require('gulp-util' ),
+var gulp          = require('gulp')
 		sass          = require('gulp-sass'),
 		browserSync   = require('browser-sync'),
 		concat        = require('gulp-concat'),
