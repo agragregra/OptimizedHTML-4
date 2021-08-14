@@ -9,7 +9,7 @@
 	"author": "WebDesign Master",
 	"license": "ISC",
 	"devDependencies": {
-		"browser-sync": "^2.27.1",
+		"browser-sync": "^2.27.5",
 		"del": "^6.0.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
@@ -22,6 +22,6 @@
 		"gulp-rsync": "0.0.9",
 		"gulp-sass": "^5.0.0",
 		"gulp-uglify": "^3.0.2",
-		"sass": "^1.35.1"
+		"sass": "^1.37.5"
 	}
 }
