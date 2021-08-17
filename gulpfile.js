@@ -13,7 +13,6 @@ var gulp          = require('gulp')
 		notify        = require('gulp-notify'),
 		rsync         = require('gulp-rsync'),
 		imageResize   = require('gulp-image-resize'),
-		imagemin      = require('gulp-imagemin'),
 		del           = require('del');
 
 // Local Server
@@ -56,13 +55,11 @@ gulp.task('scripts', function() {
 gulp.task('img1x', function() {
 	return gulp.src('app/img/_src/**/*.*')
 	.pipe(imageResize({ width: '50%' }))
-	.pipe(imagemin())
 	.pipe(gulp.dest('app/img/@1x/'))
 });
 gulp.task('img2x', function() {
 	return gulp.src('app/img/_src/**/*.*')
 	.pipe(imageResize({ width: '100%' }))
-	.pipe(imagemin())
 	.pipe(gulp.dest('app/img/@2x/'))
 });
 
