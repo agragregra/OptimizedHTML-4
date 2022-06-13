@@ -9,8 +9,8 @@
 	"author": "WebDesign Master",
 	"license": "ISC",
 	"devDependencies": {
-		"browser-sync": "^2.27.9",
-		"del": "^6.0.0",
+		"browser-sync": "^2.27.10",
+		"del": "^6.1.1",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
 		"gulp-clean-css": "^4.3.0",
@@ -21,6 +21,6 @@
 		"gulp-rsync": "0.0.9",
 		"gulp-sass": "^5.1.0",
 		"gulp-uglify-es": "^3.0.0",
-		"sass": "^1.51.0"
+		"sass": "^1.52.3"
 	}
 }
