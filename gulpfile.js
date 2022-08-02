@@ -13,7 +13,7 @@ var gulp          = require('gulp')
 		notify        = require('gulp-notify'),
 		rsync         = require('gulp-rsync'),
 		imageResize   = require('gulp-image-resize'),
-		del           = require('del');
+		clean         = require('gulp-clean');
 
 // Local Server
 gulp.task('browser-sync', function() {
@@ -65,7 +65,7 @@ gulp.task('img2x', function() {
 
 // Clean @*x IMG's
 gulp.task('cleanimg', function() {
-	return del(['app/img/@*'], { force:true })
+	return gulp.src('app/img/@*', {allowEmpty: true}).pipe(clean())
 });
 
 // HTML Live Reload
