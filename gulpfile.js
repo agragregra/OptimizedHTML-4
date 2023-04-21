@@ -76,11 +76,12 @@ gulp.task('code', function() {
 
 // Deploy
 gulp.task('rsync', function() {
-	return gulp.src('app/**')
+	return gulp.src('app/') // Без звёздочек!
 	.pipe(rsync({
 		root: 'app/',
 		hostname: 'username@yousite.com',
 		destination: 'yousite/public_html/',
+		clean: true, // Mirror copy with file deletion
 		// include: ['*.htaccess'], // Includes files to deploy
 		exclude: ['**/Thumbs.db', '**/*.DS_Store'], // Excludes files from deploy
 		recursive: true,
