@@ -84,7 +84,7 @@ function rsync() {
 
 function startwatch() {
 	watch([`app/${syntax}/**/*.${syntax}`], { usePolling: true }, styles)
-	watch(['app/js/common.js', 'libs/**/*.js'], { usePolling: true }, scripts)
+	watch(['app/js/common.js', 'app/libs/**/*.js'], { usePolling: true }, scripts)
 	watch([`app/**/*.{${fileswatch}}`], { usePolling: true }).on('change', browserSync.reload)
 	watch(['app/img/_src/**/*'], { usePolling: true }, img)
 }
