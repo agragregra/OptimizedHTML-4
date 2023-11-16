@@ -1,5 +1,7 @@
 let syntax     = 'sass', // Syntax - .sass or .scss
-		fileswatch = 'html,htm,txt,json,md,woff2' // List of files extensions for watching & hard reload
+		fileswatch = 'html,htm,txt,json,md,woff2', // List of files extensions for watching & hard reload
+		gmWatch    = false // true/false GraphicsMagick watching "img/_src" folder (true/false).
+											// Linux install gm: sudo apt update; sudo apt install graphicsmagick
 
 import pkg from 'gulp'
 const { src, dest, parallel, series, watch } = pkg
@@ -86,11 +88,12 @@ function startwatch() {
 	watch([`app/${syntax}/**/*.${syntax}`], { usePolling: true }, styles)
 	watch(['app/js/common.js', 'app/libs/**/*.js'], { usePolling: true }, scripts)
 	watch([`app/**/*.{${fileswatch}}`], { usePolling: true }).on('change', browserSync.reload)
-	watch(['app/img/_src/**/*'], { usePolling: true }, img)
+	gmWatch && watch(['app/img/_src/**/*'], { usePolling: true }, img) // GraphicsMagick watching image sources if allowed
 }
 
 export { scripts, styles, rsync, cleanimg }
 export let img = parallel(img1x, img2x)
 export let assets = series(img, scripts, styles)
 
-export default series(img, scripts, styles, parallel(browsersync, startwatch))
+export default gmWatch ? series(img, scripts, styles, parallel(browsersync, startwatch))
+											 : series(scripts, styles, parallel(browsersync, startwatch))
