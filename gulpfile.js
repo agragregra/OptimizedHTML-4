@@ -1,8 +1,8 @@
 let syntax     = 'sass', // Syntax - .sass or .scss
 		fileswatch = 'html,htm,txt,json,md,woff2', // List of files extensions for watching & hard reload
 		gmWatch    = false // true/false GraphicsMagick watching "img/_src" folder.
-											// Install gm Linux/WSL: sudo apt update; sudo apt install graphicsmagick
-											// Install gm Git Bash: https://sourceforge.net/projects/graphicsmagick/files/
+		                   // Install gm Linux/WSL: sudo apt update; sudo apt install graphicsmagick
+		                   // Install gm Git Bash: https://sourceforge.net/projects/graphicsmagick/files/
 
 import pkg from 'gulp'
 const { src, dest, parallel, series, watch } = pkg
@@ -97,4 +97,4 @@ export let img = parallel(img1x, img2x)
 export let assets = series(img, scripts, styles)
 
 export default gmWatch ? series(img, scripts, styles, parallel(browsersync, startwatch))
-											 : series(scripts, styles, parallel(browsersync, startwatch))
+                       : series(scripts, styles, parallel(browsersync, startwatch))
