@@ -21,7 +21,7 @@
 	<li>Install Node Modules: <strong>npm i</strong>;</li>
 	<li>
 		GraphicsMagick Required (opt. line 3): <br>
-		Install gm Linux/WSL: sudo apt update; sudo apt install graphicsmagick <br>
+		Install gm Linux/WSL: <code>sudo apt update; sudo apt install graphicsmagick</code> <br>
 		Install gm Git Bash: <a href="https://sourceforge.net/projects/graphicsmagick/files/" target="_blank">https://sourceforge.net/projects/graphicsmagick/files/</a>
 	</li>
 	<li>Run the template: <strong>gulp</strong>.</li>
