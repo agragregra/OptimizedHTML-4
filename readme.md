@@ -19,7 +19,11 @@
 <ol>
 	<li><a href="https://github.com/agragregra/OptimizedHTML-4/archive/master.zip">Download</a> <strong>OptimizedHTML 4</strong> from GitHub;</li>
 	<li>Install Node Modules: <strong>npm i</strong>;</li>
-	<li>Linux Subsystem required | GraphicsMagick (sudo apt install graphicsmagick) | opt. line 3</li>
+	<li>
+		GraphicsMagick Required (opt. line 3): <br>
+		Install gm Linux/WSL: sudo apt update; sudo apt install graphicsmagick <br>
+		Install gm Git Bash: <a href="https://sourceforge.net/projects/graphicsmagick/files/" target="_blank">https://sourceforge.net/projects/graphicsmagick/files/</a>
+	</li>
 	<li>Run the template: <strong>gulp</strong>.</li>
 </ol>
 
