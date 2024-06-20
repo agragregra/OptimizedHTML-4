@@ -56,12 +56,12 @@ function styles() {
 }
 
 function img1x() {
-	return src('app/img/_src/**/*.*')
+	return src('app/img/_src/**/*.*', { encoding: false })
 	.pipe(imageResize({ width: '50%' }))
 	.pipe(dest('app/img/@1x/'))
 }
 function img2x() {
-	return src('app/img/_src/**/*.*')
+	return src('app/img/_src/**/*.*', { encoding: false })
 	.pipe(imageResize({ width: '100%' }))
 	.pipe(dest('app/img/@2x/'))
 }
