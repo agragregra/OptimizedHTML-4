@@ -45,7 +45,10 @@ function scripts() {
 
 function styles() {
 	return src([`app/${syntax}/**/*.${syntax}`])
-		.pipe(sass({ 'include css': true }))
+		.pipe(sass({
+			'include css': true,
+			silenceDeprecations: ['legacy-js-api', 'mixed-decls', 'color-functions', 'global-builtin', 'import']
+		}))
 		.pipe(postCss([
 			autoprefixer({ grid: 'autoplace' }),
 			cssnano({ preset: ['default', { discardComments: { removeAll: true } }] })
@@ -86,7 +89,7 @@ function rsync() {
 }
 
 function startwatch() {
-	watch([`app/${syntax}/**/*.${syntax}`], { usePolling: true }, styles)
+	watch([`app/${syntax}/**/*`], { usePolling: true }, styles)
 	watch(['app/js/common.js', 'app/libs/**/*.js'], { usePolling: true }, scripts)
 	watch([`app/**/*.{${fileswatch}}`], { usePolling: true }).on('change', browserSync.reload)
 	gmWatch && watch(['app/img/_src/**/*'], { usePolling: true }, img) // GraphicsMagick watching image sources if allowed

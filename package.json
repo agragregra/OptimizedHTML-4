@@ -19,9 +19,9 @@
     "gulp-image-resize": "^0.13.1",
     "gulp-postcss": "^10.0.0",
     "gulp-rsync": "0.1.0",
-    "gulp-sass": "^5.1.0",
+    "gulp-sass": "^6.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.8",
-    "sass": "^1.83.0"
+    "sass": "^1.83.4"
   }
 }
