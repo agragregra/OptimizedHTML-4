@@ -49,7 +49,7 @@ function styles() {
 			'include css': true,
 			silenceDeprecations: ['legacy-js-api', 'mixed-decls', 'color-functions', 'global-builtin', 'import'],
 			loadPaths: ['./']
-		}))
+		})).on('error', function handleError() { this.emit('end') })
 		.pipe(postCss([
 			autoprefixer({ grid: 'autoplace' }),
 			cssnano({ preset: ['default', { discardComments: { removeAll: true } }] })
