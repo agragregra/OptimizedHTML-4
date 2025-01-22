@@ -47,7 +47,8 @@ function styles() {
 	return src([`app/${syntax}/**/*.${syntax}`])
 		.pipe(sass({
 			'include css': true,
-			silenceDeprecations: ['legacy-js-api', 'mixed-decls', 'color-functions', 'global-builtin', 'import']
+			silenceDeprecations: ['legacy-js-api', 'mixed-decls', 'color-functions', 'global-builtin', 'import'],
+			loadPaths: ['./']
 		}))
 		.pipe(postCss([
 			autoprefixer({ grid: 'autoplace' }),
