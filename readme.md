@@ -1,7 +1,7 @@
 <h1><strong>OptimizedHTML 4:</strong> <br>Startup HTML template based on Gulp & Bootstrap 5</h1>
 
 <p>
-  <img src="https://raw.githubusercontent.com/agragregra/OptimizedHTML-4/master/app/img/_src/preview.jpg" alt="Start HTML Template">
+  <img src="https://raw.githubusercontent.com/webdesign-masteru/OptimizedHTML-4/master/app/img/_src/preview.jpg" alt="Start HTML Template">
 </p>
 
 <p>Author: <a href="http://webdesign-master.ru" target="_blank">WebDesign Master</a></p>
@@ -17,7 +17,7 @@
 <h2>How to use OptimizedHTML</h2>
 
 <ol>
-  <li><a href="https://github.com/agragregra/OptimizedHTML-4/archive/master.zip">Download</a> <strong>OptimizedHTML 4</strong> from GitHub;</li>
+  <li><a href="https://github.com/webdesign-masteru/OptimizedHTML-4/archive/master.zip">Download</a> <strong>OptimizedHTML 4</strong> from GitHub;</li>
   <li>Install Node Modules: <strong>npm i</strong>;</li>
   <li>
     GraphicsMagick Required (opt. line 3): <br>
